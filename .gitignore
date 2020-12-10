@@ -1,0 +1,9 @@
+.idea
+/*.iml
+/modules/*.iml
+*.class
+*.iml
+*.jar
+target/
+logs/
+data/score.xml
