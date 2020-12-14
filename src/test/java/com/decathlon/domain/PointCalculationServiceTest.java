@@ -1,29 +1,24 @@
-package com.decathlon.service;
+package com.decathlon.domain;
 
-import com.decathlon.domain.AthletePoint;
-import com.decathlon.domain.AthletePoints;
-import com.decathlon.domain.AthleteResult;
-import com.decathlon.domain.PointCalculationServiceImpl;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.decathlon.domain.EventTable.*;
-import static com.decathlon.domain.EventTable.RUN_1500M;
 import static java.util.Collections.singletonList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class PointCalculationServiceImplTest {
+class PointCalculationServiceTest {
 
     private static final String TEST_NAME_1 = "test name1";
     private static final String TEST_NAME_2 = "test name2";
     private static final String TEST_NAME_3 = "test name3";
-    private final PointCalculationServiceImpl calculationService = new PointCalculationServiceImpl();;
+    private final PointCalculationService calculationService = new PointCalculationService();;
 
     @Test
     void testGetAthletePointsThreeAthleteTheSamePlace() {
-        AthletePoints actualAthletePoints = calculationService.calculate(getResultsTheSameScore());
+        AthletePoints actualAthletePoints = calculationService.handle(getResultsTheSameScore());
         assertEquals(getExpectedTheSamePoints(), actualAthletePoints);
     }
 
@@ -31,7 +26,7 @@ class PointCalculationServiceImplTest {
     void testGetAthletePointsWithNoTheSamePlace() {
         List<AthleteResult> results = new ArrayList<>();
         results.add(getAthleteResult(TEST_NAME_1, "43.3", "62", "23.2", "93", "2.90", "8.22", "9.83", "6", "6.45", "8.63"));
-        AthletePoints actualAthletePoints = calculationService.calculate(results);
+        AthletePoints actualAthletePoints = calculationService.handle(results);
         AthletePoints expectedAthletePoints = new AthletePoints(singletonList(getAthletePoint(TEST_NAME_1, 10814, "1")));
         assertEquals(expectedAthletePoints, actualAthletePoints);
     }

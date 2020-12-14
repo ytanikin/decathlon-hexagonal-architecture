@@ -1,6 +1,6 @@
 package com.decathlon;
 
-import com.decathlon.domain.PointCalculationServiceImpl;
+import com.decathlon.domain.PointCalculationService;
 import com.decathlon.domain.ResultRepository;
 import com.decathlon.domain.ScoreRepository;
 import com.decathlon.repository.ResultRepositoryCsv;
@@ -14,7 +14,7 @@ public class Main {
 
         ResultRepository resultRepository = new ResultRepositoryCsv(resultPath);
         ScoreRepository scoreRepository = new ScoreRepositoryXml(pathToSaveResults);
-        PointCalculationServiceImpl pointCalculationService = new PointCalculationServiceImpl();
+        PointCalculationService pointCalculationService = new PointCalculationService();
 
         ApplicationService applicationService = new ApplicationService(resultRepository, scoreRepository, pointCalculationService);
         applicationService.run();

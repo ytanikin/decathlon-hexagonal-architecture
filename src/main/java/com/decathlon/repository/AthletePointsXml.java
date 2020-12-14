@@ -49,7 +49,7 @@ public class AthletePointsXml {
 
         private final List<AthletePoint.Exporter> athletePointExporters = new ArrayList<>();
 
-        static AthletePointsXml from(AthletePoints athletePoints) {  //or OF
+        static AthletePointsXml from(AthletePoints athletePoints) {
             AthletePointsXml.AthletePointsExporter athletePointsExporter = new AthletePointsXml.AthletePointsExporter();
             athletePoints.export(athletePointsExporter);
             return athletePointsExporter.build();

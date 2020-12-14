@@ -7,7 +7,7 @@ public class AthletePoints {
 
     private final List<AthletePoint> points;
 
-    public AthletePoints(List<AthletePoint> points) {
+    AthletePoints(List<AthletePoint> points) {
         this.points = points;
     }
 

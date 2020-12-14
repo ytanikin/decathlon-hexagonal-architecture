@@ -8,24 +8,24 @@ public class AthletePoint {
     private final int points;
     private String place;
 
+    static AthletePoint from(AthleteResult result) {
+        return from(result.getName(), result.points());
+    }
+
+    static AthletePoint from(String name, int points) {
+        return new AthletePoint(name, points);
+    }
+
     private AthletePoint(String name, int points) {
         this.name = name;
         this.points = points;
     }
 
-    public static AthletePoint from(AthleteResult result) {
-        return from(result.getName(), result.points());
-    }
-
-    public static AthletePoint from(String name, int points) {
-        return new AthletePoint(name, points);
-    }
-
-    public int getPoints() {
+    int getPoints() {
         return points;
     }
 
-    public void setPlace(String place) {
+    void setPlace(String place) {
         this.place = place;
     }
 
@@ -63,6 +63,5 @@ public class AthletePoint {
         void setPlace(String place);
 
         void setPoints(int points);
-//        build()
     }
 }

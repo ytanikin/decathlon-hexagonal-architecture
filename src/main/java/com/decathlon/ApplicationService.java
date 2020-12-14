@@ -1,8 +1,6 @@
 package com.decathlon;
 
 import com.decathlon.domain.*;
-import com.decathlon.domain.AthletePoints;
-import com.decathlon.domain.AthleteResult;
 
 import java.util.List;
 
@@ -10,17 +8,17 @@ public class ApplicationService {
 
     private final ResultRepository resultRepository;
     private final ScoreRepository scoreRepository;
-    private final PointCalculationServiceImpl calculationService;
+    private final PointCalculationService pointCalculationService;
 
-    public ApplicationService(ResultRepository resultRepository, ScoreRepository scoreRepository, PointCalculationServiceImpl calculationService) {
+    public ApplicationService(ResultRepository resultRepository, ScoreRepository scoreRepository, PointCalculationService pointCalculationService) {
         this.resultRepository = resultRepository;
         this.scoreRepository = scoreRepository;
-        this.calculationService = calculationService;
+        this.pointCalculationService = pointCalculationService;
     }
 
     public void run() {
         List<AthleteResult> results = resultRepository.getResults();
-        AthletePoints points = calculationService.calculate(results);
+        AthletePoints points = pointCalculationService.handle(results);
         scoreRepository.save(points);
     }
 }

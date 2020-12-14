@@ -9,9 +9,9 @@ import static java.util.Comparator.reverseOrder;
 import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.toList;
 
-public class PointCalculationServiceImpl {
+public class PointCalculationService {
 
-    public AthletePoints calculate(List<AthleteResult> results) {
+    public AthletePoints handle(List<AthleteResult> results) {
         List<AthletePoint> points = results.stream()
                 .map(AthletePoint::from)
                 .collect(groupingBy(AthletePoint::getPoints, () -> new TreeMap<>(reverseOrder()), toList())).values().stream()
