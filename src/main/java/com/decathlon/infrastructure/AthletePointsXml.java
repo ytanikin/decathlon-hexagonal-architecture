@@ -1,4 +1,4 @@
-package com.decathlon.repository;
+package com.decathlon.infrastructure;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;

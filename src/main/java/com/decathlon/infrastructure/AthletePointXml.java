@@ -1,4 +1,4 @@
-package com.decathlon.repository;
+package com.decathlon.infrastructure;
 
 import com.decathlon.domain.AthletePointEntity;
 

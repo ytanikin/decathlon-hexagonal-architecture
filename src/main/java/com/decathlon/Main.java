@@ -1,10 +1,6 @@
 package com.decathlon;
 
-import com.decathlon.domain.PointCalculationService;
-import com.decathlon.domain.ResultRepository;
-import com.decathlon.domain.ScoreRepository;
-import com.decathlon.repository.ResultRepositoryCsv;
-import com.decathlon.repository.ScoreRepositoryXml;
+import com.decathlon.application.ApplicationService;
 
 public class Main {
 
@@ -12,11 +8,7 @@ public class Main {
         String resultPath = args.length == 2 ? args[0] : "data/results.csv";
         String pathToSaveResults = args.length == 2 ? args[1] : "data/score.xml";
 
-        ResultRepository resultRepository = new ResultRepositoryCsv(resultPath);
-        ScoreRepository scoreRepository = new ScoreRepositoryXml(pathToSaveResults);
-        PointCalculationService pointCalculationService = new PointCalculationService();
-
-        ApplicationService applicationService = new ApplicationService(resultRepository, scoreRepository, pointCalculationService);
+        ApplicationService applicationService = new ApplicationService(resultPath, pathToSaveResults);
         applicationService.run();
         System.out.println("Results saved in file " + pathToSaveResults);
     }
