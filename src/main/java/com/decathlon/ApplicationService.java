@@ -17,8 +17,8 @@ public class ApplicationService {
     }
 
     public void run() {
-        List<AthleteResult> results = resultRepository.getResults();
-        AthletePoints points = pointCalculationService.handle(results);
+        List<AthleteResultEntity> results = resultRepository.getResults();
+        List<AthletePointEntity> points = pointCalculationService.calculate(results);
         scoreRepository.save(points);
     }
 }

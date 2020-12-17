@@ -1,12 +1,14 @@
 package com.decathlon.repository;
 
-import com.decathlon.domain.AthletePoints;
+import com.decathlon.domain.AthletePointEntity;
 import com.decathlon.domain.ScoreRepository;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import java.nio.file.Paths;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class ScoreRepositoryXml implements ScoreRepository {
 
@@ -17,8 +19,11 @@ public class ScoreRepositoryXml implements ScoreRepository {
     }
 
     @Override
-    public void save(AthletePoints athletePoints) {
-        AthletePointsXml athletePointsXml = AthletePointsXml.AthletePointsExporter.from(athletePoints);
+    public void save(List<AthletePointEntity> athletePointEntities) {
+        List<AthletePointXml> pointXmls = athletePointEntities.stream()
+                .map(AthletePointXml.AthletePointExporter::from)
+                .collect(Collectors.toList());
+        AthletePointsXml athletePointsXml = new AthletePointsXml(pointXmls);
         try {
             JAXBContext jaxbContext = JAXBContext.newInstance(athletePointsXml.getClass());
             Marshaller marshaller = jaxbContext.createMarshaller();

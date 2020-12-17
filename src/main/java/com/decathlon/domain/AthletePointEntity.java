@@ -2,21 +2,21 @@ package com.decathlon.domain;
 
 import java.util.Objects;
 
-public class AthletePoint {
+public class AthletePointEntity {
 
     private final String name;
     private final int points;
     private String place;
 
-    static AthletePoint from(AthleteResult result) {
+    static AthletePointEntity from(AthleteResultEntity result) {
         return from(result.getName(), result.points());
     }
 
-    static AthletePoint from(String name, int points) {
-        return new AthletePoint(name, points);
+    static AthletePointEntity from(String name, int points) {
+        return new AthletePointEntity(name, points);
     }
 
-    private AthletePoint(String name, int points) {
+    private AthletePointEntity(String name, int points) {
         this.name = name;
         this.points = points;
     }
@@ -33,7 +33,7 @@ public class AthletePoint {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        AthletePoint that = (AthletePoint) o;
+        AthletePointEntity that = (AthletePointEntity) o;
         return points == that.points &&
                 Objects.equals(name, that.name) &&
                 Objects.equals(place, that.place);
@@ -50,11 +50,10 @@ public class AthletePoint {
         return "AthletePoint{name='" + name + '\'' + ", points=" + points + ", place='" + place + '\'' + '}';
     }
 
-    Exporter export(Exporter exporter) {
+    public void export(Exporter exporter) {
         exporter.setName(name);
         exporter.setPlace(place);
         exporter.setPoints(points);
-        return exporter;
     }
 
     public interface Exporter {

@@ -1,6 +1,6 @@
 package com.decathlon.repository;
 
-import com.decathlon.domain.AthletePoint;
+import com.decathlon.domain.AthletePointEntity;
 
 import java.util.Objects;
 
@@ -70,13 +70,15 @@ public class AthletePointXml {
                 '}';
     }
 
-    static class AthletePointExporter implements AthletePoint.Exporter {
+    static class AthletePointExporter implements AthletePointEntity.Exporter {
         private String name;
         private String place;
         private int points;
 
-        static AthletePointXml from(AthletePoint.Exporter p) {
-            return ((AthletePointExporter) p).build();
+        static AthletePointXml from(AthletePointEntity p) {
+            AthletePointXml.AthletePointExporter athletePointExporter = new AthletePointXml.AthletePointExporter();
+            p.export(athletePointExporter);
+            return athletePointExporter.build();
         }
 
         @Override

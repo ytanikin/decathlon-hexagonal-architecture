@@ -11,18 +11,16 @@ import static java.util.stream.Collectors.toList;
 
 public class PointCalculationService {
 
-    public AthletePoints handle(List<AthleteResult> results) {
-        List<AthletePoint> points = results.stream()
-                .map(AthletePoint::from)
-                .collect(groupingBy(AthletePoint::getPoints, () -> new TreeMap<>(reverseOrder()), toList())).values().stream()
+    public List<AthletePointEntity> calculate(List<AthleteResultEntity> results) {
+        return results.stream()
+                .map(AthletePointEntity::from)
+                .collect(groupingBy(AthletePointEntity::getPoints, () -> new TreeMap<>(reverseOrder()), toList())).values().stream()
                 .peek(calculatePlaceConsumer())
                 .flatMap(Collection::stream)
                 .collect(toList());
-
-        return new AthletePoints(points);
     }
 
-    private Consumer<List<AthletePoint>> calculatePlaceConsumer() {
+    private Consumer<List<AthletePointEntity>> calculatePlaceConsumer() {
         int[] placeCounter = new int[]{0};
         return athletePoints -> {
             String place = calculatePlace(placeCounter, athletePoints);
@@ -30,13 +28,12 @@ public class PointCalculationService {
         };
     }
 
-    private String calculatePlace(int[] placeCounter, List<AthletePoint> athletePointEntities) {
+    private String calculatePlace(int[] placeCounter, List<AthletePointEntity> athletePointEntityEntities) {
         placeCounter[0]++;
         StringBuilder place = new StringBuilder(Integer.toString(placeCounter[0]));
-        for (int i = 0; i < athletePointEntities.size() - 1; i++) {
+        for (int i = 0; i < athletePointEntityEntities.size() - 1; i++) {
             place.append("-").append(++placeCounter[0]);
         }
         return place.toString();
     }
-
 }
