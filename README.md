@@ -1,4 +1,4 @@
-# decathlon-ddd
+# decathlon
 
 A starting point for implementing Hexagonical architecture. You will also find it named clean architecture, ports-and-adapters, or onion architecture.
 
