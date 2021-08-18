@@ -25,24 +25,24 @@ class PointCalculationServiceTest {
     @Test
     void testGetAthletePointsWithNoTheSamePlace() {
         List<AthleteResultEntity> results = new ArrayList<>();
-        results.add(getAthleteResult(TEST_NAME_1, "43.3", "62", "23.2", "93", "2.90", "8.22", "9.83", "6", "6.45", "8.63"));
+        results.add(getAthleteResult(TEST_NAME_1, "3.3", "62", "3.2", "3", "2.90", "8.22", "9.83", "6", "6.45", "8.63"));
         List<AthletePointEntity> actualAthletePointEntities = calculationService.calculate(results);
-        assertEquals(singletonList(getAthletePoint(TEST_NAME_1, 10814, "1")), actualAthletePointEntities);
+        assertEquals(singletonList(getAthletePoint(TEST_NAME_1, 43760, "1")), actualAthletePointEntities);
     }
 
     private List<AthleteResultEntity> getResultsTheSameScore() {
         List<AthleteResultEntity> results = new ArrayList<>();
-        results.add(getAthleteResult(TEST_NAME_1, "43.3", "62", "23.2", "93", "2.90", "8.22", "9.83", "6", "6.45", "8.63"));
-        results.add(getAthleteResult(TEST_NAME_2, "43.3", "62", "23.2", "93", "2.90", "8.22", "9.83", "6", "6.45", "8.63"));
-        results.add(getAthleteResult(TEST_NAME_3, "403.3", "92", "23.2", "93", "200.90", "8.22", "9.83", "6", "6.45", "8.63"));
+        results.add(getAthleteResult(TEST_NAME_1, "12.61", "5.00", "9.22", "1.50", "60.39", "16.43", "21.60", "2.60", "35.81", "5:25.72"));
+        results.add(getAthleteResult(TEST_NAME_2, "12.61", "5.00", "9.22", "1.50", "60.39", "16.43", "21.60", "2.60", "35.81", "5:25.72"));
+        results.add(getAthleteResult(TEST_NAME_3, "12.61", "5.10", "19.22", "1.50", "60.39", "16.43", "21.60", "2.60", "35.81", "5:25.72"));
         return results;
     }
 
     private List<AthletePointEntity> getExpectedTheSamePoints() {
         List<AthletePointEntity> points = new ArrayList<>();
-        points.add(getAthletePoint(TEST_NAME_1, 10814, "1-2-3"));
-        points.add(getAthletePoint(TEST_NAME_2, 10814, "1-2-3"));
-        points.add(getAthletePoint(TEST_NAME_3, 6621, "4"));
+        points.add(getAthletePoint(TEST_NAME_3, 4835, "1"));
+        points.add(getAthletePoint(TEST_NAME_1, 4203, "2-3"));
+        points.add(getAthletePoint(TEST_NAME_2, 4203, "2-3"));
         return points;
     }
 
@@ -52,18 +52,9 @@ class PointCalculationServiceTest {
         return athletePointEntity;
     }
 
-    protected AthleteResultEntity getAthleteResult(String name,
-                                                   String running100mSec,
-                                                   String longJumpCm,
-                                                   String shotPutMeter,
-                                                   String highJumpCm,
-                                                   String running400mSec,
-                                                   String running100mHurdlesSec,
-                                                   String discusThrowMeter,
-                                                   String poleVaultCm,
-                                                   String javelinThrowMeter,
-                                                   String running1500mSec
-    ) {
+    protected AthleteResultEntity getAthleteResult(String name, String running100mSec, String longJumpCm, String shotPutMeter, String highJumpCm,
+                                                   String running400mSec, String running100mHurdlesSec, String discusThrowMeter, String poleVaultCm,
+                                                   String javelinThrowMeter, String running1500mSec) {
         AthleteResultEntity athleteResultEntity = new AthleteResultEntity(name);
         athleteResultEntity.addEventScore(RUN_100M, running100mSec);
         athleteResultEntity.addEventScore(LONG_JUMP, longJumpCm);
