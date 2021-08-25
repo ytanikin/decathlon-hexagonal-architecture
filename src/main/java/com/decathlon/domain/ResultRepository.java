@@ -3,5 +3,5 @@ package com.decathlon.domain;
 import java.util.List;
 
 public interface ResultRepository {
-    List<AthleteResultEntity> getResults();
+    List<AthleteResult> getResults();
 }

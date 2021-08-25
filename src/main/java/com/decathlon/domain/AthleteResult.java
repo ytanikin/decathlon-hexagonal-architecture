@@ -4,12 +4,12 @@ import java.util.EnumMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class AthleteResultEntity {
+public class AthleteResult {
 
     private final String name;
     private final Map<EventTable, Double> results = new EnumMap<>(EventTable.class);
 
-    public AthleteResultEntity(String name) {
+    public AthleteResult(String name) {
         this.name = name;
     }
 
@@ -32,7 +32,7 @@ public class AthleteResultEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        AthleteResultEntity that = (AthleteResultEntity) o;
+        AthleteResult that = (AthleteResult) o;
 
         if (!Objects.equals(name, that.name)) return false;
         return results.equals(that.results);

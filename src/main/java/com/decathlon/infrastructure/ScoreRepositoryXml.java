@@ -1,6 +1,6 @@
 package com.decathlon.infrastructure;
 
-import com.decathlon.domain.AthletePointEntity;
+import com.decathlon.domain.AthletePoint;
 import com.decathlon.domain.ScoreRepository;
 
 import javax.xml.bind.JAXBContext;
@@ -19,7 +19,7 @@ public class ScoreRepositoryXml implements ScoreRepository {
     }
 
     @Override
-    public void save(List<AthletePointEntity> athletePointEntities) {
+    public void save(List<AthletePoint> athletePointEntities) {
         List<AthletePointXml> pointXmls = athletePointEntities.stream()
                 .map(AthletePointXml.AthletePointExporter::from)
                 .collect(Collectors.toList());

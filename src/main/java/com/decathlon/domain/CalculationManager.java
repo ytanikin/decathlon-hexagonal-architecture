@@ -9,18 +9,27 @@ import static java.util.Comparator.reverseOrder;
 import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.toList;
 
-public class PointCalculationService {
+public class CalculationManager {
 
-    public List<AthletePointEntity> calculate(List<AthleteResultEntity> results) {
+    private static CalculationManager INSTANCE;
+
+    public static synchronized CalculationManager singleInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new CalculationManager();
+        }
+        return INSTANCE;
+    }
+
+    public List<AthletePoint> calculate(List<AthleteResult> results) {
         return results.stream()
-                .map(AthletePointEntity::from)
-                .collect(groupingBy(AthletePointEntity::getPoints, () -> new TreeMap<>(reverseOrder()), toList())).values().stream()
+                .map(AthletePoint::from)
+                .collect(groupingBy(AthletePoint::getPoints, () -> new TreeMap<>(reverseOrder()), toList())).values().stream()
                 .peek(calculatePlaceConsumer())
                 .flatMap(Collection::stream)
                 .collect(toList());
     }
 
-    private Consumer<List<AthletePointEntity>> calculatePlaceConsumer() {
+    private Consumer<List<AthletePoint>> calculatePlaceConsumer() {
         int[] placeCounter = new int[]{0};
         return athletePoints -> {
             String place = calculatePlace(placeCounter, athletePoints);
@@ -28,10 +37,10 @@ public class PointCalculationService {
         };
     }
 
-    private String calculatePlace(int[] placeCounter, List<AthletePointEntity> athletePointEntityEntities) {
+    private String calculatePlace(int[] placeCounter, List<AthletePoint> athletePointEntities) {
         placeCounter[0]++;
         StringBuilder place = new StringBuilder(Integer.toString(placeCounter[0]));
-        for (int i = 0; i < athletePointEntityEntities.size() - 1; i++) {
+        for (int i = 0; i < athletePointEntities.size() - 1; i++) {
             place.append("-").append(++placeCounter[0]);
         }
         return place.toString();
